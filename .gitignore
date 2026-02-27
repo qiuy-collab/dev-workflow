@@ -1,0 +1,66 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local environment
+.env
+**/.env
+!.env.example
+!**/.env.example
+
+# Frontend dependencies/build
+frontend/node_modules/
+frontend/dist/
+
+# Backend build/runtime
+backend/target/
+backend/runtime/
+backend/database/*.db
+
+# Nested git repo metadata (avoid embedded repository on root push)
+backend/.git/
+
+# Runtime and logs
+runtime/**
+!runtime/.gitkeep
+logs/**/*.log
+!logs/.gitkeep
+temp/**
+tmp/**
+
+# Test source files (do not upload)
+frontend/tests/
+backend/tests/
+**/__tests__/
+**/*.test.*
+**/*.spec.*
+
+# Generated test artifacts (do not upload)
+test/frontend-dev/test-report.md
+test/frontend-dev/test-summary.json
+test/frontend-dev/e2e-test-report.md
+test/frontend-dev/e2e-test-summary.json
+test/frontend-dev/e2e-test-matrix.md
+test/backend-scaffold/api-test-report.md
+test/backend-scaffold/api-test-summary.json
+test/backend-core/comprehensive-test-report.md
+test/backend-core/comprehensive-test-summary.json
+test/final-delivery/comprehensive-report.md
+test/**/*test-report*.md
+test/**/*test-summary*.json
+output/sync-hash-report.json
+
+# Final package artifacts
+output/final-delivery-*.zip
+
+# Runtime debug artifacts
+test/test-points.jsonl
+runtime/curl-*.*
+runtime/tmp-import*.md
+
+# Keep templates and references
+!skills/**/references/*.md

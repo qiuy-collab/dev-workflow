@@ -1,0 +1,423 @@
+{
+  "version": "1.0.0",
+  "workflow": {
+    "name": "software-development-workflow",
+    "description": "Automated pipeline from requirements to final delivery",
+    "skills": [
+      "requirement-planning",
+      "api-design",
+      "backend-codegen",
+      "frontend-dev",
+      "backend-scaffold",
+      "backend-core",
+      "final-delivery"
+    ],
+    "outputDirectory": "./output",
+    "logDirectory": "./logs",
+    "tempDirectory": "./temp",
+    "outputMode": "flat",
+    "autoMode": true,
+    "forceQuestioningOnFirstSkill": true,
+    "forceRequirementClarificationBeforeOutput": true
+  },
+  "skillResolution": {
+    "preferredSource": "global",
+    "globalSkillsPath": "C:/Users/34109/.codex/skills",
+    "localSkillsPath": "./skills",
+    "fallbackToLocal": true,
+    "allowDirectLocalRead": false,
+    "logResolution": true
+  },
+  "skills": {
+    "requirement-planning": {
+      "name": "Requirement Planning",
+      "description": "Collect requirements and produce requirement docs + tech stack",
+      "order": 1,
+      "dependencies": [],
+      "inputs": [],
+      "outputs": [
+        "output/requirement-planning-requirements.md",
+        "output/requirement-planning-tech-stack.json"
+      ],
+      "outputPath": "output/",
+      "outputMode": "flat",
+      "validation": {
+        "required": [
+          "output/requirement-planning-requirements.md",
+          "output/requirement-planning-tech-stack.json"
+        ]
+      }
+    },
+    "api-design": {
+      "name": "API Design",
+      "description": "Produce API list, data models and API docs",
+      "order": 2,
+      "dependencies": [
+        "requirement-planning"
+      ],
+      "inputs": [
+        "output/requirement-planning-requirements.md",
+        "output/requirement-planning-tech-stack.json"
+      ],
+      "outputs": [
+        "output/api-design-api-list.md",
+        "output/api-design-data-models.md",
+        "output/api-design-api-documentation.md"
+      ],
+      "outputPath": "output/",
+      "outputMode": "flat",
+      "validation": {
+        "required": [
+          "output/api-design-api-list.md",
+          "output/api-design-data-models.md"
+        ],
+        "optional": [
+          "output/api-design-api-documentation.md"
+        ]
+      }
+    },
+    "backend-codegen": {
+      "name": "Backend Codegen",
+      "description": "Generate backend structure and model skeleton",
+      "order": 3,
+      "dependencies": [
+        "requirement-planning",
+        "api-design"
+      ],
+      "inputs": [
+        "output/requirement-planning-requirements.md",
+        "output/requirement-planning-tech-stack.json",
+        "output/api-design-api-list.md",
+        "output/api-design-data-models.md"
+      ],
+      "outputs": [
+        "output/backend-codegen-project-structure.md",
+        "backend/"
+      ],
+      "outputPath": "output/",
+      "outputMode": "flat",
+      "validation": {
+        "required": [
+          "output/backend-codegen-project-structure.md"
+        ]
+      }
+    },
+    "frontend-dev": {
+      "name": "Frontend Dev",
+      "description": "Build frontend and write frontend test reports",
+      "order": 4,
+      "dependencies": [
+        "requirement-planning",
+        "api-design"
+      ],
+      "inputs": [
+        "output/requirement-planning-requirements.md",
+        "output/requirement-planning-tech-stack.json",
+        "output/api-design-api-list.md",
+        "output/api-design-data-models.md"
+      ],
+      "outputs": [
+        "frontend/",
+        "test/frontend-dev/test-report.md",
+        "test/frontend-dev/test-summary.json",
+        "test/frontend-dev/e2e-test-report.md",
+        "test/frontend-dev/e2e-test-summary.json",
+        "test/frontend-dev/e2e-test-matrix.md"
+      ],
+      "outputPath": "test/frontend-dev/",
+      "outputMode": "structured",
+      "validation": {
+        "testThreshold": 1,
+        "required": [
+          "test/frontend-dev/test-report.md",
+          "test/frontend-dev/test-summary.json",
+          "test/frontend-dev/e2e-test-report.md",
+          "test/frontend-dev/e2e-test-summary.json",
+          "test/frontend-dev/e2e-test-matrix.md"
+        ]
+      }
+    },
+    "backend-scaffold": {
+      "name": "Backend Scaffold",
+      "description": "Make backend runnable and perform smoke tests",
+      "order": 5,
+      "dependencies": [
+        "requirement-planning",
+        "api-design",
+        "backend-codegen"
+      ],
+      "inputs": [
+        "output/requirement-planning-requirements.md",
+        "output/requirement-planning-tech-stack.json",
+        "output/api-design-api-list.md",
+        "output/api-design-data-models.md",
+        "output/backend-codegen-project-structure.md",
+        "backend/"
+      ],
+      "outputs": [
+        "output/backend-scaffold/service-info.json",
+        "test/backend-scaffold/api-test-report.md",
+        "test/backend-scaffold/api-test-summary.json"
+      ],
+      "outputPath": "test/backend-scaffold/",
+      "outputMode": "structured",
+      "validation": {
+        "testThreshold": 1,
+        "serviceMustStart": true,
+        "required": [
+          "output/backend-scaffold/service-info.json",
+          "test/backend-scaffold/api-test-report.md",
+          "test/backend-scaffold/api-test-summary.json"
+        ]
+      }
+    },
+    "backend-core": {
+      "name": "Backend Core",
+      "description": "Implement core APIs and run comprehensive tests",
+      "order": 6,
+      "dependencies": [
+        "requirement-planning",
+        "api-design",
+        "backend-codegen",
+        "backend-scaffold"
+      ],
+      "inputs": [
+        "output/requirement-planning-requirements.md",
+        "output/requirement-planning-tech-stack.json",
+        "output/api-design-api-list.md",
+        "output/api-design-data-models.md",
+        "backend/",
+        "output/backend-scaffold/service-info.json"
+      ],
+      "outputs": [
+        "output/backend-core/service-info.json",
+        "test/backend-core/comprehensive-test-report.md",
+        "test/backend-core/comprehensive-test-summary.json"
+      ],
+      "outputPath": "test/backend-core/",
+      "outputMode": "structured",
+      "validation": {
+        "testThreshold": 1,
+        "required": [
+          "output/backend-core/service-info.json",
+          "test/backend-core/comprehensive-test-report.md",
+          "test/backend-core/comprehensive-test-summary.json"
+        ]
+      }
+    },
+    "final-delivery": {
+      "name": "Final Delivery",
+      "description": "Run end-to-end delivery validation and emit final artifacts",
+      "order": 7,
+      "dependencies": [
+        "requirement-planning",
+        "api-design",
+        "backend-codegen",
+        "frontend-dev",
+        "backend-scaffold",
+        "backend-core"
+      ],
+      "inputs": [
+        "output/requirement-planning-requirements.md",
+        "output/requirement-planning-tech-stack.json",
+        "output/api-design-api-list.md",
+        "output/api-design-data-models.md",
+        "test/frontend-dev/test-summary.json",
+        "test/backend-scaffold/api-test-summary.json",
+        "test/backend-core/comprehensive-test-summary.json"
+      ],
+      "outputs": [
+        "test/final-delivery/comprehensive-report.md",
+        "output/final-delivery/delivery-summary.json",
+        "output/final-delivery/delivery-manifest.md"
+      ],
+      "outputPath": "output/final-delivery/",
+      "outputMode": "structured",
+      "validation": {
+        "testThreshold": 1,
+        "required": [
+          "test/final-delivery/comprehensive-report.md",
+          "output/final-delivery/delivery-summary.json",
+          "output/final-delivery/delivery-manifest.md"
+        ]
+      }
+    }
+  },
+  "validation": {
+    "testThreshold": {
+      "frontend": 1.0,
+      "backend": 1.0
+    },
+    "maxRetries": 5,
+    "retryScope": "per-test-point",
+    "autoFixOnFailure": true,
+    "skipAfterMaxRetries": true,
+    "requireFailureAnalysis": true,
+    "continueOnError": false,
+    "validateOutputs": true,
+    "validateDependencies": true,
+    "enforceRequiredOutputCheck": true,
+    "failOnMissingRequiredOutput": true,
+    "requiredOutputSource": "skills.<skill>.validation.required"
+  },
+  "testing": {
+    "pointTransportMode": "hybrid",
+    "pointTransportOptions": {
+      "realtimeLogFile": "logs/workflow.log",
+      "jsonRelayFile": "test/test-points.jsonl",
+      "fallbackToRealtimeOnJsonError": true
+    },
+    "frontendReportMode": "requirement-traceability",
+    "frontendReportOptions": {
+      "requireOneToOneMapping": true,
+      "requireEvidenceForPass": true,
+      "allowPassWithoutEvidence": false,
+      "requirementSourceFile": "output/requirement-planning-requirements.md"
+    },
+    "frontendE2E": {
+      "enabled": true,
+      "runner": "playwright",
+      "requireInteractionAcceptance": true,
+      "matrixFile": "test/frontend-dev/e2e-test-matrix.md"
+    },
+    "preflight": {
+      "requirePreflightGate": true,
+      "requiredFilesBeforeWorkflowTests": [
+        "output/requirement-planning-requirements.md",
+        "output/requirement-planning-tech-stack.json",
+        "output/api-design-api-list.md",
+        "output/api-design-data-models.md",
+        "output/backend-codegen-project-structure.md",
+        "test/frontend-dev/e2e-test-matrix.md",
+        "frontend/package.json",
+        "backend/app/main.py"
+      ],
+      "requiredServiceEndpoints": [
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:18080/health"
+      ]
+    }
+  },
+  "deployment": {
+    "frontend": {
+      "port": 3000,
+      "buildCommand": "npm run build",
+      "startCommand": "npm run dev",
+      "envFile": ".env"
+    },
+    "backend": {
+      "port": 18080,
+      "startCommand": "cargo run",
+      "envFile": ".env"
+    }
+  },
+  "runtime": {
+    "directory": "./runtime",
+    "hotReload": {
+      "frontendCommand": "npm run dev -- --host {HOST} --port {PORT}",
+      "backendCommands": {
+        "Rust (Axum)": "cargo watch -x run",
+        "Python (FastAPI)": "uvicorn app.main:app --reload --host {HOST} --port {PORT}",
+        "Node.js (Express)": "npm run dev",
+        "Java (Spring Boot)": "mvn spring-boot:run"
+      },
+      "fallbackBackendCommand": "{startCommand}"
+    }
+  },
+  "techStack": {
+    "supported": {
+      "frontend": [
+        "React",
+        "Vue",
+        "Angular"
+      ],
+      "backend": [
+        "Rust (Axum)",
+        "Python (FastAPI)",
+        "Java (Spring Boot)",
+        "Node.js (Express)"
+      ],
+      "database": [
+        "SQLite",
+        "PostgreSQL",
+        "MySQL",
+        "MongoDB"
+      ]
+    },
+    "default": {
+      "frontend": "Vue",
+      "backend": "Rust (Axum)",
+      "database": "SQLite"
+    },
+    "mapping": {
+      "Rust (Axum)": {
+        "framework": "Axum",
+        "orm": "SQLx",
+        "packageManager": "cargo",
+        "database": [
+          "SQLite",
+          "PostgreSQL",
+          "MySQL"
+        ]
+      },
+      "Python (FastAPI)": {
+        "framework": "FastAPI",
+        "orm": "SQLAlchemy",
+        "packageManager": "pip",
+        "database": [
+          "PostgreSQL",
+          "MySQL"
+        ]
+      },
+      "Java (Spring Boot)": {
+        "framework": "Spring Boot",
+        "orm": "MyBatis/JPA",
+        "packageManager": "Maven",
+        "database": [
+          "MySQL",
+          "PostgreSQL"
+        ]
+      },
+      "Node.js (Express)": {
+        "framework": "Express",
+        "orm": "Mongoose/Sequelize",
+        "packageManager": "npm",
+        "database": [
+          "MongoDB",
+          "PostgreSQL",
+          "MySQL"
+        ]
+      }
+    }
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "[timestamp] [level] skill=<skill> phase=<phase> suite=<suite> test_point=<point> test_status=<status> attempt=<n>/<max> message",
+    "singleFile": true,
+    "fileName": "workflow.log",
+    "skillLifecycleRequired": true,
+    "testPointLoggingRequired": true,
+    "testLogFormat": "[timestamp] [level] skill=<skill> phase=test suite=<suite> test_point=<point> test_status=<status> attempt=<n>/<max> message",
+    "maxFileSize": "10MB",
+    "maxFiles": 10,
+    "console": true,
+    "file": true
+  },
+  "finalDelivery": {
+    "generate": true,
+    "outputPath": "output/final-delivery/",
+    "outputMode": "structured",
+    "validation": {
+      "requiredPassRate": 1.0,
+      "requireFrontendRunnable": true,
+      "requireBackendRunnable": true,
+      "requireIntegrationPass": true,
+      "requireDocsComplete": true
+    },
+    "contents": [
+      "test/final-delivery/comprehensive-report.md",
+      "output/final-delivery/delivery-summary.json",
+      "output/final-delivery/delivery-manifest.md"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+* text=auto
+
+# Keep shell/powershell files as LF for cross-platform readability
+*.sh text eol=lf
+*.ps1 text eol=lf
+
+# JSON/Markdown should stay text
+*.json text
+*.md text
+
+# Binary packages
+*.zip binary
+*.png binary
+*.jpg binary
+*.jpeg binary

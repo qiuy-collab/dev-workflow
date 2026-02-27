@@ -1,0 +1,14 @@
+{
+  "name": "final-delivery",
+  "description": "Final delivery phase: integration validation and final artifact packaging",
+  "author": "System",
+  "version": "1.0.0",
+  "requires": ["requirement-planning", "api-design", "backend-codegen", "frontend-dev", "backend-scaffold", "backend-core"],
+  "outputs": [
+    "test/final-delivery/comprehensive-report.md",
+    "output/final-delivery/delivery-summary.json",
+    "output/final-delivery/delivery-manifest.md"
+  ],
+  "entry": "../../scripts/final-delivery.ps1",
+  "type": "pipeline"
+}
