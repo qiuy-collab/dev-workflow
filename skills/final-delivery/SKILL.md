@@ -26,6 +26,8 @@ description: Final delivery stage. Run integration validation and delivery compl
   - `output/api-design-data-models.md`
   - `output/ui/ui-spec.md`
   - `output/ui/ui-tokens.json`
+  - `output/ui/ui-quality-metrics.md`
+  - `output/ui/frontend-ui-implementation-notes.md`
   - `test/frontend-dev/test-summary.json`
   - `test/backend-scaffold/api-test-summary.json`
   - `test/backend-core/comprehensive-test-summary.json`
@@ -70,4 +72,5 @@ powershell -ExecutionPolicy Bypass -File scripts/final-delivery.ps1 -Mode all -E
   - spacing consistency on all pages
   - style consistency for at least 4 component types (Button/Input/Card/List)
   - interaction states (hover/active/focus/disabled)
+  - visual hierarchy and layout density thresholds from `output/ui/ui-quality-metrics.md`
   - evidence format depends on mode: script logs/assertions or DevTools MCP screenshots/logs

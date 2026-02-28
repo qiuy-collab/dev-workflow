@@ -14,11 +14,13 @@ Use this checklist when running `FD-UI-001` in `final-delivery` with `testing.ui
   - active
   - focus
   - disabled
+- Visual hierarchy + layout density thresholds from `output/ui/ui-quality-metrics.md`
 
 ## Evidence (Mandatory)
 Include DevTools MCP outputs:
 - Screenshots or
 - Logs/console output references
+- Mapping proof from `output/ui/frontend-ui-implementation-notes.md`
 
 ## Steps
 1. Launch the frontend and open target pages.
@@ -26,6 +28,7 @@ Include DevTools MCP outputs:
 3. Verify component styling against tokens (font/size/radius/shadow).
 4. Trigger interaction states and verify visual consistency.
 5. Capture evidence and attach to `test/final-delivery/comprehensive-report.md`.
+6. Evaluate thresholds defined in `output/ui/ui-quality-metrics.md`.
 
 ## Result Template
 ```
@@ -37,4 +40,6 @@ Findings: <pass | issues>
 Evidence:
 - <screenshot/log ref 1>
 - <screenshot/log ref 2>
+- <ui-quality-metrics threshold evaluation ref>
+- <frontend-ui-implementation-notes mapping ref>
 ```

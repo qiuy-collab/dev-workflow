@@ -40,5 +40,35 @@
     "duration.fast": "150ms",
     "duration.normal": "200ms",
     "easing.standard": "ease"
+  },
+  "state": {
+    "hover.opacity": 0.92,
+    "active.scale": 0.99,
+    "focus.ringColor": "rgba(12, 59, 255, 0.35)",
+    "disabled.opacity": 0.5
+  },
+  "component": {
+    "button": {
+      "height.md": "40px",
+      "padding.md": "8px 12px",
+      "radius": "12px",
+      "font.size": "14px"
+    },
+    "input": {
+      "height.md": "40px",
+      "padding.md": "8px 12px",
+      "radius": "12px",
+      "border.default": "1px solid rgba(12, 20, 36, 0.12)"
+    },
+    "card": {
+      "padding.md": "12px",
+      "radius": "16px",
+      "shadow": "0 10px 24px rgba(13, 24, 54, 0.16)"
+    },
+    "list": {
+      "item.gap": "8px",
+      "item.padding": "10px",
+      "item.radius": "12px"
+    }
   }
 }

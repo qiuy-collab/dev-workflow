@@ -128,6 +128,10 @@ Execute in the following order:
 - Force user confirmation in order:
   - Confirm component positions (iterate until confirmed).
   - Confirm UI style (e.g., iOS / minimalist / grand / other) (iterate until confirmed).
+- After confirmations, output requirement-stage UI drafts:
+  - `output/ui/ui-spec.md`
+  - `output/ui/ui-tokens.json`
+  - `output/ui/ui-quality-metrics.md`
 - Do not proceed to the next phase or Skill until all confirmations are explicit.
 
 ### 5.2 Modes
@@ -219,10 +223,17 @@ Execute in the following order:
 ### 7.1 Required Files
 - `output/requirement-planning-requirements.md`
 - `output/requirement-planning-tech-stack.json`
-- `output/api-design-api-list.md`
-- `output/api-design-data-models.md`
 - `output/ui/ui-spec.md`
 - `output/ui/ui-tokens.json`
+- `output/ui/ui-quality-metrics.md`
+- `output/api-design-api-list.md`
+- `output/api-design-data-models.md`
+- `design-system/MASTER.md`
+- `design-system/pages/`
+- `output/ui/ui-spec.md`
+- `output/ui/ui-tokens.json`
+- `output/ui/ui-quality-metrics.md`
+- `output/ui/frontend-ui-implementation-notes.md`
 - `test/frontend-dev/test-report.md`
 - `test/frontend-dev/test-summary.json`
 - `test/frontend-dev/e2e-test-report.md`

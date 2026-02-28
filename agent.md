@@ -246,12 +246,19 @@ After the 5 core questions are completed, you must execute three forced stages:
 3. Force user confirmation in order:
    - Confirm component positions (iterate until confirmed).
    - Confirm UI style (e.g., iOS / minimalist / grand / other) (iterate until confirmed).
-Only after all confirmations are explicit may you proceed to the next phase or next Skill.
+4. Generate requirement-stage UI drafts:
+   - `output/ui/ui-spec.md`
+   - `output/ui/ui-tokens.json`
+   - `output/ui/ui-quality-metrics.md`
+Only after all confirmations are explicit and draft files are generated may you proceed to the next phase or next Skill.
 
 ### Output
 
 - `output/requirement-planning-requirements.md`
 - `output/requirement-planning-tech-stack.json`
+- `output/ui/ui-spec.md` (draft)
+- `output/ui/ui-tokens.json` (draft)
+- `output/ui/ui-quality-metrics.md` (draft)
 
 ### Validation
 
@@ -325,20 +332,22 @@ Only after all confirmations are explicit may you proceed to the next phase or n
 
 ### Required Steps
 
-1. Read requirement + API outputs and extract UI constraints
-2. Build design-system baseline and page-level UI contracts
-3. Generate executable UI artifacts for development input
+1. Read requirement + API outputs and requirement-stage UI drafts (including quality metrics)
+2. Generate design-system baseline first (`design-system/MASTER.md` + `design-system/pages/*.md`)
+3. Derive executable UI artifacts from design-system docs and overwrite draft UI outputs
 4. Validate output completeness
 
 ### Output
 
+- `design-system/MASTER.md`
+- `design-system/pages/*.md`
 - `output/ui/ui-spec.md`
 - `output/ui/ui-tokens.json`
-- Optional: `design-system/MASTER.md`, `design-system/pages/*.md`
+- `output/ui/ui-quality-metrics.md`
 
 ### Gate
 
-- `output/ui/ui-spec.md` and `output/ui/ui-tokens.json` must exist before `frontend-dev`
+- `design-system/MASTER.md`, `design-system/pages/*.md`, `output/ui/ui-spec.md`, `output/ui/ui-tokens.json`, `output/ui/ui-quality-metrics.md` must all exist before `frontend-dev`
 
 ---
 
@@ -360,6 +369,7 @@ Only after all confirmations are explicit may you proceed to the next phase or n
 ### Output
 
 - Frontend source code written to `frontend/`
+- `output/ui/frontend-ui-implementation-notes.md`
 - `test/frontend-dev/test-report.md`
 - `test/frontend-dev/test-summary.json`
 - `test/frontend-dev/e2e-test-report.md`
@@ -501,7 +511,7 @@ Only after all confirmations are explicit may you proceed to the next phase or n
 - FD-RUN-001: frontend running
 - FD-RUN-002: backend running
 - FD-INT-001: integration passes
-- FD-UI-001: UI quality verified via configured mode (spacing on all pages, components >=4 types, interaction states) with evidence
+- FD-UI-001: UI quality verified via configured mode (spacing on all pages, components >=4 types, interaction states, hierarchy/density thresholds) with evidence
 - FD-DOC-001: docs complete
 - FD-CONF-001: deployment config complete
 
@@ -761,6 +771,9 @@ Each test point must record:
 | Version | Date       | Notes |
 | --- | --- | --- |
 | 1.9.0 | 2026-02-27 | Ban fabricated test reports; require real execution evidence; ensure workflow.log exists |
+| 1.10.0 | 2026-02-28 | ui-ux-pro-max-local changed to mandatory two-step outputs: design-system first, then ui-spec/ui-tokens |
+| 1.11.0 | 2026-02-28 | requirement-planning now must output UI draft files before ui-ux-pro-max-local refinement |
+| 1.12.0 | 2026-02-28 | add UI quality metrics contract and frontend UI implementation notes for stronger visual consistency gate |
 | 1.8.0 | 2026-02-26 | Add mandatory frontend E2E interaction acceptance rules and E2E matrix output requirement |
 | 1.7.0 | 2026-02-26 | Add test point transport mode config and frontend acceptance traceability matrix enforcement |
 | 1.6.0 | 2026-02-26 | Restore full mandatory mechanism spec, fill in audit items and execution details |

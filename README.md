@@ -44,6 +44,10 @@ Prohibited: skipping steps, reversing order, or forcing execution without depend
 - Force user confirmation in order:
   - Confirm component positions (iterate until confirmed).
   - Confirm UI style (e.g., iOS / minimalist / grand / other) (iterate until confirmed).
+- After confirmations, requirement-planning must generate draft UI artifacts:
+  - `output/ui/ui-spec.md`
+  - `output/ui/ui-tokens.json`
+  - `output/ui/ui-quality-metrics.md`
 - Do not proceed to the next phase or Skill until all confirmations are explicit.
 
 ### 3.2 Run Mode
@@ -138,6 +142,9 @@ Rules:
 ### requirement-planning
 - `output/requirement-planning-requirements.md`
 - `output/requirement-planning-tech-stack.json`
+- `output/ui/ui-spec.md` (draft)
+- `output/ui/ui-tokens.json` (draft)
+- `output/ui/ui-quality-metrics.md` (draft)
 
 ### api-design
 - `output/api-design-api-list.md`
@@ -149,13 +156,15 @@ Rules:
 - Backend code written to `backend/`
 
 ### ui-ux-pro-max-local
-- `output/ui/ui-spec.md`
-- `output/ui/ui-tokens.json`
-- `design-system/MASTER.md` (optional)
-- `design-system/pages/*.md` (optional)
+- `design-system/MASTER.md`
+- `design-system/pages/*.md`
+- `output/ui/ui-spec.md` (refined from drafts + design-system)
+- `output/ui/ui-tokens.json` (refined from drafts + design-system)
+- `output/ui/ui-quality-metrics.md` (refined measurable thresholds)
 
 ### frontend-dev
 - Frontend code written to `frontend/`
+- `output/ui/frontend-ui-implementation-notes.md`
 - `test/frontend-dev/test-report.md`
 - `test/frontend-dev/test-summary.json`
 - `test/frontend-dev/e2e-test-report.md`
@@ -207,6 +216,7 @@ Rules:
 - Backend run
 - Integration
 - UI quality verification using configured mode (all pages, 4 components, interaction states)
+- UI quality also requires hierarchy/density thresholds from `output/ui/ui-quality-metrics.md`
 - Documentation and deployment config
 
 ## 6.1 Test Execution Consistency (Mandatory)
