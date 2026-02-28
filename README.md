@@ -43,7 +43,7 @@ Prohibited: skipping steps, reversing order, or forcing execution without depend
 - Produce an ASCII component visualization per page using `skills/requirement-planning/references/ui-component-ascii-template.md`.
 - Force user confirmation in order:
   - Confirm component positions (iterate until confirmed).
-  - Confirm UI style (e.g., iOS / minimalist / grand / other) (iterate until confirmed).
+  - Confirm UI style using candidates from `ui-ux-pro-max-local/data/*` (iterate until confirmed).
 - After confirmations, requirement-planning must generate draft UI artifacts:
   - `output/ui/ui-spec.md`
   - `output/ui/ui-tokens.json`
@@ -57,6 +57,7 @@ Config items:
 - `workflow.forceRequirementClarificationBeforeOutput`
 - `true`: After requirements are generated, automatically execute to the final step.
 - `false`: Confirm before each Skill.
+- `autoMode` only controls Skill-to-Skill progression; it must not skip mandatory sub-flows inside a Skill.
 - When `forceQuestioningOnFirstSkill=true`, only requirement-planning enforces mandatory questioning; other Skills do not.
 - When `forceRequirementClarificationBeforeOutput=true`, do not output the final requirement document until key requirement info is clarified.
 
@@ -256,28 +257,19 @@ Notes:
 
 ### Agent short prompt (global Skills scenario)
 ```text
-Run “100% completion mode,” do not ask questions, auto-decide and fix blockers.
-
-Before starting, must read:
-- ./agent.md
-- ./agent-config.json
-- ./README.md
-- ./QUICKSTART.md
-- ./CONFIG-GUIDE.md
-
-Remember and enforce:
-1. Execute in order: requirement-planning -> api-design -> backend-codegen -> ui-ux-pro-max-local -> frontend-dev -> backend-scaffold -> backend-core -> final-delivery (Skills from global source).
-2. Before each phase, read agent-config.json skills.<skill>.inputs and skills.<skill>.validation.required.
-3. Before each phase ends, validate required outputs; if missing, immediately generate and re-validate; do not proceed.
-4. Write tests and reports to ./test, business and delivery docs to ./output, logs to ./logs/workflow.log, test point relay to ./test/test-points.jsonl.
-5. All file writes must be UTF-8.
-6. Test gates must be 100%. On failure: “locate -> fix -> retest,” max 5 retries per point. No PASS without real execution evidence.
-7. If config/docs/execution are inconsistent, auto-fix config and docs before continuing.
-8. At the end, must output final-delivery audit and satisfy: missing_count=0, completion_percent=100.
-
-if you are ready ,i will tell you my requestment
-
----
+Run in 100% completion mode.
+First read: `./agent.md`, `./agent-config.json`, `./README.md`, `./QUICKSTART.md`.
+Follow fixed skill order from `agent-config.json`.
+`autoMode` only applies between Skills; do not skip mandatory sub-steps inside Skill 1 (`requirement-planning`).
+In Skill 1, you must ask all 5 core question groups (Q1-Q5), each using `options + custom answer`.
+Before each Skill: read `skills.<skill>.inputs` and `skills.<skill>.validation.required`.
+Before each Skill ends: verify required outputs exist; if missing, generate and re-check.
+Write docs to `./output`, test artifacts to `./test`, logs to `./logs/workflow.log`, relay to `./test/test-points.jsonl`.
+All writes UTF-8. Test gates must be 100%. Failures: locate -> fix -> retest (max 5).
+No PASS without real execution evidence. Do not write test reports without running real test commands.
+End with final-delivery audit: `missing_count=0`, `completion_percent=100`.
+If ready, ask me for requirements.
+```
 
 ## 8. Workflow Log Command Examples
 ```powershell

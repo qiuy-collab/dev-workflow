@@ -81,6 +81,7 @@ Config items:
 - `agent-config.json.workflow.forceRequirementClarificationBeforeOutput`
 - `true`: After requirements are completed, automatically execute to the final step.
 - `false`: Must confirm before starting each Skill.
+- `autoMode` only applies to major phase chaining (Skill-to-Skill), not mandatory sub-steps inside a Skill.
 - When `forceQuestioningOnFirstSkill=true`, only the first Skill (requirement-planning) enforces mandatory questioning; subsequent Skills do not.
 - When `forceRequirementClarificationBeforeOutput=true`, do not output the final requirement document until key information is clarified in requirement-planning.
 - Do not forget this mode during execution.
@@ -233,23 +234,26 @@ Workflow logs are written only to `logs/workflow.log`.
 3. Identify functional requirements
 4. Identify non-functional requirements
 5. Embed functional supplements (option-select) within questioning to expand features based on user choices
-6. Generate acceptance criteria by module (auto-generated, not asked)
-7. Run UI visualization and confirmation (mandatory, see below)
-8. Output priorities
-9. Output tech stack
+6. Mandatory questioning format: complete Q1-Q5, each with `options + custom answer`; do not merge into fewer question groups
+7. Generate acceptance criteria by module (auto-generated, not asked)
+8. Run UI visualization and confirmation (mandatory, see below)
+9. Output priorities
+10. Output tech stack
 
 #### UI Visualization and Confirmation (Mandatory, Iterative)
 
 After the 5 core questions are completed, you must execute three forced stages:
+
 1. Generate a page list derived from confirmed requirements and user flow.
 2. Produce an ASCII component visualization for each page (use the template in `skills/requirement-planning/references/ui-component-ascii-template.md`).
 3. Force user confirmation in order:
-   - Confirm component positions (iterate until confirmed).
-   - Confirm UI style (e.g., iOS / minimalist / grand / other) (iterate until confirmed).
+  - Confirm component positions (iterate until confirmed).
+  - Confirm UI style using candidates from `ui-ux-pro-max-local/data/*` (iterate until confirmed).
 4. Generate requirement-stage UI drafts:
-   - `output/ui/ui-spec.md`
-   - `output/ui/ui-tokens.json`
-   - `output/ui/ui-quality-metrics.md`
+  - `output/ui/ui-spec.md`
+  - `output/ui/ui-tokens.json`
+  - `output/ui/ui-quality-metrics.md`
+
 Only after all confirmations are explicit and draft files are generated may you proceed to the next phase or next Skill.
 
 ### Output
@@ -768,16 +772,21 @@ Each test point must record:
 
 ## 16. Version History
 
-| Version | Date       | Notes |
-| --- | --- | --- |
-| 1.9.0 | 2026-02-27 | Ban fabricated test reports; require real execution evidence; ensure workflow.log exists |
-| 1.10.0 | 2026-02-28 | ui-ux-pro-max-local changed to mandatory two-step outputs: design-system first, then ui-spec/ui-tokens |
-| 1.11.0 | 2026-02-28 | requirement-planning now must output UI draft files before ui-ux-pro-max-local refinement |
-| 1.12.0 | 2026-02-28 | add UI quality metrics contract and frontend UI implementation notes for stronger visual consistency gate |
-| 1.8.0 | 2026-02-26 | Add mandatory frontend E2E interaction acceptance rules and E2E matrix output requirement |
-| 1.7.0 | 2026-02-26 | Add test point transport mode config and frontend acceptance traceability matrix enforcement |
-| 1.6.0 | 2026-02-26 | Restore full mandatory mechanism spec, fill in audit items and execution details |
-| 1.5.0 | 2026-02-26 | Adjust runtime and documentation specs |
-| 1.4.0 | 2026-02-26 | Change Skill source to global-first, local fallback |
-| 1.3.0 | 2026-02-26 | Test gates at 100%, max 5 retries per failure |
-| 1.0.0 | 2026-02-25 | Initial version |
+
+| Version | Date       | Notes                                                                                                     |
+| ------- | ---------- | --------------------------------------------------------------------------------------------------------- |
+| 1.9.0   | 2026-02-27 | Ban fabricated test reports; require real execution evidence; ensure workflow.log exists                  |
+| 1.10.0  | 2026-02-28 | ui-ux-pro-max-local changed to mandatory two-step outputs: design-system first, then ui-spec/ui-tokens    |
+| 1.11.0  | 2026-02-28 | requirement-planning now must output UI draft files before ui-ux-pro-max-local refinement                 |
+| 1.12.0  | 2026-02-28 | add UI quality metrics contract and frontend UI implementation notes for stronger visual consistency gate |
+| 1.13.0  | 2026-03-01 | requirement-planning UI style question must source candidates from ui-ux-pro-max-local data files         |
+| 1.8.0   | 2026-02-26 | Add mandatory frontend E2E interaction acceptance rules and E2E matrix output requirement                 |
+| 1.7.0   | 2026-02-26 | Add test point transport mode config and frontend acceptance traceability matrix enforcement              |
+| 1.6.0   | 2026-02-26 | Restore full mandatory mechanism spec, fill in audit items and execution details                          |
+| 1.5.0   | 2026-02-26 | Adjust runtime and documentation specs                                                                    |
+| 1.4.0   | 2026-02-26 | Change Skill source to global-first, local fallback                                                       |
+| 1.3.0   | 2026-02-26 | Test gates at 100%, max 5 retries per failure                                                             |
+| 1.0.0   | 2026-02-25 | Initial version                                                                                           |
+
+
+&nbsp;
