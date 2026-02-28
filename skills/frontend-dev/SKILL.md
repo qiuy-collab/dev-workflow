@@ -17,6 +17,7 @@ description: Develop frontend code based on API docs and page structure, with co
   - [requirement-planning](../requirement-planning/SKILL.md): requirements list, user flows, feature priority, tech stack
   - [api-design](../api-design/SKILL.md): page list, field definitions, API list
   - [backend-codegen](../backend-codegen/SKILL.md): data models, backend implementation
+  - [ui-ux-pro-max-local](../ui-ux-pro-max-local/SKILL.md): ui-spec and ui-tokens for implementation
 - Tech stack reading: read frontend stack selection, including:
   - Frontend framework (React / Vue / Angular / other)
   - State management (Redux / Vuex / MobX / other)
@@ -26,6 +27,7 @@ description: Develop frontend code based on API docs and page structure, with co
   - Read `agent-config.json -> skills.frontend-dev.validation.required`
   - Convert required outputs into a phase acceptance checklist
   - Before phase ends, verify these paths exist:
+    - `output/ui/frontend-ui-implementation-notes.md`
     - `test/frontend-dev/test-report.md`
     - `test/frontend-dev/test-summary.json`
     - `test/frontend-dev/e2e-test-report.md`
@@ -41,6 +43,9 @@ description: Develop frontend code based on API docs and page structure, with co
   - Field definitions: fields and validation rules per page
   - API list: available APIs
   - Requirements list: functional requirements and acceptance criteria
+  - UI spec: `output/ui/ui-spec.md`
+  - UI tokens: `output/ui/ui-tokens.json`
+  - UI quality metrics: `output/ui/ui-quality-metrics.md`
   - Tech stack: confirm framework and tooling
 2. **Plan project structure**
   - Follow [references/project-structure.md](references/project-structure.md)
@@ -86,6 +91,12 @@ description: Develop frontend code based on API docs and page structure, with co
   - Check field display matches design
   - Check responsive layout
   - Check interaction feedback
+5. **UI implementation self-check (non-test gate)**
+  - Produce `output/ui/frontend-ui-implementation-notes.md`
+  - Record how UI code maps to:
+    - `ui-spec.md` page/component contracts
+    - `ui-tokens.json` global + component/state tokens
+    - `ui-quality-metrics.md` measurable thresholds
 
 ### Phase 4: Iterative Optimization
 
@@ -164,6 +175,9 @@ Dev → Test acceptance → All pass?
 - API client template: see [references/api-client-template.md](references/api-client-template.md)
 - Test checklist: see [references/test-checklist.md](references/test-checklist.md)
 - Iteration guide: see [references/iteration-guide.md](references/iteration-guide.md)
+- UI implementation notes template: see [references/ui-implementation-notes-template.md](references/ui-implementation-notes-template.md)
+- UI quality verification is executed in `final-delivery` (not gated in `frontend-dev`)
+- `frontend-dev` does not run UI quality gate tests, but must output implementation notes for final-delivery audit.
 
 ## Notes
 
