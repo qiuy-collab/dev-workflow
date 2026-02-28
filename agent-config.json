@@ -7,6 +7,7 @@
       "requirement-planning",
       "api-design",
       "backend-codegen",
+      "ui-ux-pro-max-local",
       "frontend-dev",
       "backend-scaffold",
       "backend-core",
@@ -102,19 +103,54 @@
         ]
       }
     },
-    "frontend-dev": {
-      "name": "Frontend Dev",
-      "description": "Build frontend and write frontend test reports",
+    "ui-ux-pro-max-local": {
+      "name": "UI UX Pro Max Local",
+      "description": "Generate design-system guidance and output executable UI spec/tokens",
       "order": 4,
       "dependencies": [
         "requirement-planning",
-        "api-design"
+        "api-design",
+        "backend-codegen"
       ],
       "inputs": [
         "output/requirement-planning-requirements.md",
         "output/requirement-planning-tech-stack.json",
         "output/api-design-api-list.md",
         "output/api-design-data-models.md"
+      ],
+      "outputs": [
+        "output/ui/ui-spec.md",
+        "output/ui/ui-tokens.json",
+        "design-system/"
+      ],
+      "outputPath": "output/ui/",
+      "outputMode": "structured",
+      "validation": {
+        "required": [
+          "output/ui/ui-spec.md",
+          "output/ui/ui-tokens.json"
+        ],
+        "optional": [
+          "design-system/MASTER.md"
+        ]
+      }
+    },
+    "frontend-dev": {
+      "name": "Frontend Dev",
+      "description": "Build frontend and write frontend test reports",
+      "order": 5,
+      "dependencies": [
+        "requirement-planning",
+        "api-design",
+        "ui-ux-pro-max-local"
+      ],
+      "inputs": [
+        "output/requirement-planning-requirements.md",
+        "output/requirement-planning-tech-stack.json",
+        "output/api-design-api-list.md",
+        "output/api-design-data-models.md",
+        "output/ui/ui-spec.md",
+        "output/ui/ui-tokens.json"
       ],
       "outputs": [
         "frontend/",
@@ -140,7 +176,7 @@
     "backend-scaffold": {
       "name": "Backend Scaffold",
       "description": "Make backend runnable and perform smoke tests",
-      "order": 5,
+      "order": 6,
       "dependencies": [
         "requirement-planning",
         "api-design",
@@ -174,7 +210,7 @@
     "backend-core": {
       "name": "Backend Core",
       "description": "Implement core APIs and run comprehensive tests",
-      "order": 6,
+      "order": 7,
       "dependencies": [
         "requirement-planning",
         "api-design",
@@ -208,11 +244,12 @@
     "final-delivery": {
       "name": "Final Delivery",
       "description": "Run end-to-end delivery validation and emit final artifacts",
-      "order": 7,
+      "order": 8,
       "dependencies": [
         "requirement-planning",
         "api-design",
         "backend-codegen",
+        "ui-ux-pro-max-local",
         "frontend-dev",
         "backend-scaffold",
         "backend-core"
@@ -222,6 +259,8 @@
         "output/requirement-planning-tech-stack.json",
         "output/api-design-api-list.md",
         "output/api-design-data-models.md",
+        "output/ui/ui-spec.md",
+        "output/ui/ui-tokens.json",
         "test/frontend-dev/test-summary.json",
         "test/backend-scaffold/api-test-summary.json",
         "test/backend-core/comprehensive-test-summary.json"
@@ -280,6 +319,22 @@
       "requireInteractionAcceptance": true,
       "matrixFile": "test/frontend-dev/e2e-test-matrix.md"
     },
+    "uiQualityCheck": {
+      "mode": "script",
+      "requireAllPages": true,
+      "requiredComponentTypes": [
+        "Button",
+        "Input",
+        "Card",
+        "List"
+      ],
+      "requiredInteractionStates": [
+        "hover",
+        "active",
+        "focus",
+        "disabled"
+      ]
+    },
     "preflight": {
       "requirePreflightGate": true,
       "requiredFilesBeforeWorkflowTests": [
@@ -288,6 +343,8 @@
         "output/api-design-api-list.md",
         "output/api-design-data-models.md",
         "output/backend-codegen-project-structure.md",
+        "output/ui/ui-spec.md",
+        "output/ui/ui-tokens.json",
         "test/frontend-dev/e2e-test-matrix.md",
         "frontend/package.json",
         "backend/app/main.py"
@@ -393,6 +450,7 @@
   "logging": {
     "level": "INFO",
     "format": "[timestamp] [level] skill=<skill> phase=<phase> suite=<suite> test_point=<point> test_status=<status> attempt=<n>/<max> message",
+    "writeEnabled": true,
     "singleFile": true,
     "fileName": "workflow.log",
     "skillLifecycleRequired": true,

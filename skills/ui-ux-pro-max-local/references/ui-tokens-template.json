@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "name": "project-ui-tokens",
+    "version": "1.0.0"
+  },
+  "color": {
+    "bg.canvas": "#F4F7FF",
+    "bg.surface": "rgba(255, 255, 255, 0.75)",
+    "text.primary": "#0C1424",
+    "text.secondary": "#475569",
+    "brand.primary": "#0C3BFF",
+    "state.error": "#B91C1C"
+  },
+  "typography": {
+    "font.family.base": "\"SF Pro Display\", \"SF Pro Text\", \"Helvetica Neue\", sans-serif",
+    "font.size.body": "16px",
+    "font.size.caption": "12px",
+    "font.weight.regular": 400,
+    "font.weight.medium": 500,
+    "font.weight.bold": 700
+  },
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "12px",
+    "lg": "16px",
+    "xl": "24px"
+  },
+  "radius": {
+    "sm": "8px",
+    "md": "12px",
+    "lg": "20px",
+    "pill": "999px"
+  },
+  "shadow": {
+    "sm": "0 10px 24px rgba(13, 24, 54, 0.16)",
+    "md": "0 20px 60px rgba(13, 24, 54, 0.18)"
+  },
+  "motion": {
+    "duration.fast": "150ms",
+    "duration.normal": "200ms",
+    "easing.standard": "ease"
+  }
+}

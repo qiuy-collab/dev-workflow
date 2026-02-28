@@ -17,6 +17,7 @@ description: Develop frontend code based on API docs and page structure, with co
   - [requirement-planning](../requirement-planning/SKILL.md): requirements list, user flows, feature priority, tech stack
   - [api-design](../api-design/SKILL.md): page list, field definitions, API list
   - [backend-codegen](../backend-codegen/SKILL.md): data models, backend implementation
+  - [ui-ux-pro-max-local](../ui-ux-pro-max-local/SKILL.md): ui-spec and ui-tokens for implementation
 - Tech stack reading: read frontend stack selection, including:
   - Frontend framework (React / Vue / Angular / other)
   - State management (Redux / Vuex / MobX / other)
@@ -41,6 +42,8 @@ description: Develop frontend code based on API docs and page structure, with co
   - Field definitions: fields and validation rules per page
   - API list: available APIs
   - Requirements list: functional requirements and acceptance criteria
+  - UI spec: `output/ui/ui-spec.md`
+  - UI tokens: `output/ui/ui-tokens.json`
   - Tech stack: confirm framework and tooling
 2. **Plan project structure**
   - Follow [references/project-structure.md](references/project-structure.md)
@@ -164,6 +167,7 @@ Dev → Test acceptance → All pass?
 - API client template: see [references/api-client-template.md](references/api-client-template.md)
 - Test checklist: see [references/test-checklist.md](references/test-checklist.md)
 - Iteration guide: see [references/iteration-guide.md](references/iteration-guide.md)
+- UI quality verification is executed in `final-delivery` (not gated in `frontend-dev`)
 
 ## Notes
 

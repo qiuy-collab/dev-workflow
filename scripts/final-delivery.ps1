@@ -175,6 +175,8 @@ function Get-RequiredArtifacts {
         "output/api-design-api-list.md",
         "output/api-design-data-models.md",
         "output/backend-codegen-project-structure.md",
+        "output/ui/ui-spec.md",
+        "output/ui/ui-tokens.json",
         "test/frontend-dev/test-summary.json",
         "test/frontend-dev/e2e-test-summary.json",
         "test/frontend-dev/e2e-test-matrix.md",

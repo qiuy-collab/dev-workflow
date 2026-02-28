@@ -84,10 +84,22 @@ Get-Content -Raw agent-config.json | ConvertFrom-Json | Out-Null
 - `testing.frontendE2E.requireInteractionAcceptance`
   - `true`: interaction acceptance must be covered by E2E
 
+### 2.4.1 UI Quality Check Mode
+
+- `testing.uiQualityCheck.mode`
+  - `script`: use automated script checks (default)
+  - `devtools-mcp`: use Chrome DevTools MCP checks
+- `testing.uiQualityCheck.requireAllPages`
+  - `true`: UI quality must cover all pages/views
+- `testing.uiQualityCheck.requiredComponentTypes`
+  - required component classes to verify (default: Button/Input/Card/List)
+- `testing.uiQualityCheck.requiredInteractionStates`
+  - required interaction states to verify (default: hover/active/focus/disabled)
+
 ### 2.5 Skills Source Strategy
 
 - `skillResolution.preferredSource`
-  - `global`: prefer global `C:/Users/34109/.codex/skills`
+  - `global`: prefer global `D:/niuma/newmax/resources/skills`
   - `local`: prefer repo-local `./skills`
 - `skillResolution.fallbackToLocal`
   - Whether to fall back to local if global is unavailable
@@ -100,7 +112,13 @@ Get-Content -Raw agent-config.json | ConvertFrom-Json | Out-Null
 - PowerShell writes must explicitly specify `-Encoding UTF8`; do not rely on system defaults.
 - This is a workflow implementation constraint and is not recommended to change to other encodings.
 
-### 2.7 Required Output Contract Validation (Prevent Agent Misses)
+### 2.7 Logging Controls
+
+- `logging.writeEnabled`
+  - `true`: allow writing workflow logs (default)
+  - `false`: disable writing to `logs/workflow.log` and test log sinks (only use for dry runs)
+
+### 2.8 Required Output Contract Validation (Prevent Agent Misses)
 
 - `validation.enforceRequiredOutputCheck`
   - `true`: each Skill must read and enforce `skills.<skill>.validation.required`
@@ -131,6 +149,10 @@ Get-Content -Raw agent-config.json | ConvertFrom-Json | Out-Null
   "testing": {
     "pointTransportMode": "hybrid",
     "frontendReportMode": "requirement-traceability",
+    "uiQualityCheck": {
+      "mode": "script",
+      "requireAllPages": true
+    },
     "frontendE2E": {
       "enabled": true,
       "requireInteractionAcceptance": true
@@ -161,6 +183,10 @@ Get-Content -Raw agent-config.json | ConvertFrom-Json | Out-Null
   },
   "testing": {
     "pointTransportMode": "realtime",
+    "uiQualityCheck": {
+      "mode": "script",
+      "requireAllPages": true
+    },
     "frontendReportMode": "smoke-summary",
     "frontendE2E": {
       "enabled": false

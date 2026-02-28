@@ -7,6 +7,7 @@ Verify each requirement against the acceptance criteria in the requirements list
 
 ### Phase 2: UI Testing
 Check page layout, responsiveness, and interaction feedback.
+UI quality full-gate is executed in `final-delivery`; frontend phase keeps basic UI sanity checks only.
 
 ### Phase 3: Integration Testing
 Test front-end/back-end integration and end-to-end user flows.
@@ -94,6 +95,12 @@ REQ-001 User Registration
 - [ ] Elements are aligned correctly
 - [ ] Spacing is consistent
 - [ ] Font sizes are consistent
+
+### UI Quality (Frontend Sanity, Non-Gate)
+- [ ] Spacing consistency verified on all pages
+- [ ] Style consistency verified for 4 component types (Button/Input/Card/List)
+- [ ] Interaction states verified (hover/active/focus/disabled)
+- [ ] If checked in frontend phase, evidence is optional; final gate evidence is required in `final-delivery`
 
 ### Responsive Testing
 - [ ] Desktop displays correctly (1920x1080)
